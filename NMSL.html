@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>舌焚錄 - 主页</title> <!-- 修改网站标题 -->
+    <title>舌焚錄 - 主页</title>
 
     <style>
         /* --- 定义动画 (保持不变) --- */
@@ -47,7 +47,7 @@
         .top-right-button:hover { background-color: rgba(255, 80, 80, 0.3); color: #ffffff; box-shadow: 0 0 18px rgba(255, 0, 0, 0.7); }
 
         /* --- 通用模态窗口样式 (保持不变) --- */
-        .modal { display: none; position: fixed; inset: 0; background-color: rgba(15, 0, 0, 0.9); z-index: 1001; justify-content: center; align-items: center; padding: 20px; animation: modal-fade-in 0.3s ease forwards; overflow-y: auto; }
+        .modal { display: none; position: fixed; inset: 0; background-color: rgba(15, 0, 0, 0.9); z-index: 1001; justify-content: center; align-items: center; padding: 20px; animation: modal-fade-in 0.3s ease forwards; overflow-y: auto; /* 允许模态框本身在内容过多时滚动 */ }
         .modal-content { background-color: #1a0505; padding: 35px 45px; border-radius: 8px; position: relative; color: #e0d0d0; width: 100%; max-width: 480px; /* Login/Register */ text-align: center; font-family: 'KaiTi', 'SimSun', serif; border: 1px solid rgba(255, 80, 80, 0.4); box-shadow: 0 5px 30px rgba(255, 0, 0, 0.3); margin: auto; }
         .modal-content h2 { color: #ff5050; text-shadow: 0 0 10px rgba(255, 80, 80, 0.5); margin-top: 0; margin-bottom: 30px; font-size: 1.8em; letter-spacing: 1.5px; font-family: 'FangSong', 'KaiTi', serif; }
         /* ... (登录/注册/公告模态框内元素样式保持不变) ... */
@@ -67,7 +67,7 @@
         .error-message { display: none; background-color: rgba(255, 80, 80, 0.15); color: #ffcccc; border: 1px solid rgba(255, 80, 80, 0.5); padding: 12px 15px; margin-top: 20px; border-radius: 5px; text-align: left; font-size: 0.95em; animation: error-wiggle 0.4s ease; position: relative; padding-left: 40px; }
         .error-message::before { content: '!'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; font-size: 1.5em; color: #ff5050; background-color: #1a0505; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; text-align: center; box-shadow: 0 0 5px rgba(255, 80, 80, 0.5); }
         .modal-announcements .modal-content { max-width: 600px; text-align: left; }
-        .announcements-list { margin-top: 20px; max-height: 45vh; overflow-y: auto; padding-right: 15px; border-top: 1px solid rgba(255, 80, 80, 0.2); padding-top: 20px; scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(50, 10, 10, 0.5); }
+        .announcements-list { margin-top: 20px; max-height: 45vh; /* 保持最大高度 */ overflow-y: auto; /* 公告列表单独滚动 */ padding-right: 15px; border-top: 1px solid rgba(255, 80, 80, 0.2); padding-top: 20px; scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(50, 10, 10, 0.5); }
         .announcements-list::-webkit-scrollbar { width: 8px; }
         .announcements-list::-webkit-scrollbar-track { background: rgba(50, 10, 10, 0.5); border-radius: 4px; }
         .announcements-list::-webkit-scrollbar-thumb { background-color: rgba(255, 80, 80, 0.4); border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.6); }
@@ -77,87 +77,87 @@
         .announcement-date { display: block; font-size: 0.9em; color: #ff8080; margin-bottom: 8px; font-family: 'Courier New', Courier, monospace; }
         .announcement-text { font-size: 1em; color: #c0a0a0; line-height: 1.7; margin: 0; }
 
-        /* --- 罪证详情模态窗口特定样式 (调整) --- */
-        .modal-details .modal-content { max-width: 750px; text-align: left; display: flex; flex-direction: column; max-height: 85vh; }
-        .details-content { /* 文本内容区 */
-            background-color: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 80, 80, 0.2);
-            padding: 20px; margin-top: 25px; margin-bottom: 5px; /* 减少与下方联系信息的间距 */
-            border-radius: 4px; color: #c0a0a0; font-size: 1em; line-height: 1.8;
-            white-space: pre-wrap; /* 保持文本格式，包括换行 */
-            overflow-y: auto; max-height: 25vh; flex-shrink: 0;
-            scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(0, 0, 0, 0.3);
+        /* --- 罪证详情模态窗口特定样式 (优化滚动条) --- */
+        .modal-details .modal-content {
+            max-width: 750px;
+            text-align: left;
+            display: flex; /* 使用 Flexbox 布局 */
+            flex-direction: column; /* 垂直排列子元素 */
+            max-height: 85vh; /* 限制模态框最大高度 */
+            overflow-y: auto; /* 当内容超出时，仅此容器出现滚动条 */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 80, 80, 0.5) rgba(10, 0, 0, 0.7);
         }
-        .details-content::-webkit-scrollbar { width: 8px; }
-        .details-content::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.3); border-radius: 4px; }
-        .details-content::-webkit-scrollbar-thumb { background-color: rgba(255, 80, 80, 0.4); border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.6); }
-        .details-content::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 80, 80, 0.6); }
+        .modal-details .modal-content::-webkit-scrollbar {
+            width: 10px;
+        }
+        .modal-details .modal-content::-webkit-scrollbar-track {
+            background: rgba(10, 0, 0, 0.7);
+            border-radius: 5px;
+        }
+        .modal-details .modal-content::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 80, 80, 0.5);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 80, 80, 0.7);
+        }
+        .modal-details .modal-content::-webkit-scrollbar-thumb:hover {
+             background-color: rgba(255, 80, 80, 0.7);
+        }
 
-         /* 联系信息区域样式 */
+        /* 子元素不再需要独立滚动 */
+        .details-content {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 80, 80, 0.2);
+            padding: 20px;
+            margin-top: 25px;
+            margin-bottom: 15px; /* 调整间距 */
+            border-radius: 4px;
+            color: #c0a0a0;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap; /* 保留换行 */
+            /* 移除 overflow-y 和 max-height */
+            flex-shrink: 0; /* 防止在 flex 容器中被压缩 */
+        }
+
         .contact-info-container {
-            padding: 0 20px; /* 左右对齐文本内容区 */
-            margin-bottom: 15px; /* 与图片间距 */
+            padding: 0 20px;
+            margin-bottom: 15px;
             flex-shrink: 0; /* 防止被压缩 */
         }
-        .contact-info-line {
-            margin-bottom: 5px; /* 行间距 */
-            font-size: 1em;
-            color: #c0a0a0; /* 默认文字颜色 */
-        }
-        .contact-info-line:last-child {
-             margin-bottom: 0; /* 最后一行无下边距 */
-        }
+        .contact-info-line { margin-bottom: 5px; font-size: 1em; color: #c0a0a0; }
+        .contact-info-line:last-child { margin-bottom: 0; }
+        .contact-info-label { color: #a09090; margin-right: 8px; display: inline-block; min-width: 60px; }
+        .blurred-login-required { display: inline-block; padding: 4px 10px; border: 1px dashed rgba(255, 80, 80, 0.3); border-radius: 4px; background-color: rgba(255, 80, 80, 0.05); color: transparent; filter: blur(3px); cursor: pointer; position: relative; transition: filter 0.2s ease, border-color 0.2s ease, background-color 0.2s ease; user-select: none; font-style: italic; vertical-align: middle; }
+        .blurred-login-required::before { content: '登录后可见'; color: rgba(255, 80, 80, 0.3); font-style: italic; }
+        .blurred-login-required:hover { filter: blur(0); border: 1px solid #ff5050; background-color: rgba(10, 0, 0, 0.7); color: transparent; }
+        .blurred-login-required:hover::before { content: attr(data-hover-text); color: #ff5050; font-style: normal; font-weight: bold; }
 
-        .contact-info-label {
-            color: #a09090; /* 标签颜色暗一点 */
-            margin-right: 8px;
-            display: inline-block; /* 确保标签和内容在同一行 */
-            min-width: 50px; /* 给标签一个最小宽度，尝试对齐 */
-        }
-        .blurred-login-required {
-            display: inline-block; /* 行内块元素 */
-            padding: 4px 10px; /* 调整内边距使更紧凑 */
-            border: 1px dashed rgba(255, 80, 80, 0.3); /* 虚线边框，类似占位符 */
+        .details-image-container {
+            text-align: center;
+            margin-top: 10px; /* 调整间距 */
+            margin-bottom: 25px;
+            min-height: 150px;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 10px;
             border-radius: 4px;
-            background-color: rgba(255, 80, 80, 0.05); /* 淡红色背景 */
-            color: transparent; /* 初始隐藏文本 */
-            filter: blur(3px); /* 初始模糊 */
-            cursor: pointer;
-            position: relative; /* 用于定位伪元素 */
-            transition: filter 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-            user-select: none; /* 防止选中文本 */
-            font-style: italic; /* 保持斜体风格 */
-            vertical-align: middle; /* 尝试垂直对齐 */
+            border: 1px solid rgba(255, 80, 80, 0.1);
+            flex-shrink: 0; /* 防止被压缩 */
         }
-         .blurred-login-required::before {
-             content: '登录后可见'; /* 初始显示的模糊文字 */
-             color: rgba(255, 80, 80, 0.3); /* 非常暗淡的红色 */
-             font-style: italic; /* 保持斜体 */
-         }
-         .blurred-login-required:hover {
-             filter: blur(0); /* 移除模糊 */
-             border: 1px solid #ff5050; /* 变为实线红色边框 */
-             background-color: rgba(10, 0, 0, 0.7); /* 深色背景强调 */
-             color: transparent; /* 仍然隐藏基础文本 */
-         }
-         .blurred-login-required:hover::before {
-             content: attr(data-hover-text); /* 显示 data 属性中的文本 */
-             color: #ff5050; /* 文本变为亮红色 */
-             font-style: normal; /* 变为正常字体 */
-             font-weight: bold;
-             /* 不需要额外背景或边框了，父元素已有 */
-         }
-
-
-        .details-image-container { /* 图片容器 */
-            text-align: center; margin-top: 15px; margin-bottom: 25px; min-height: 150px; background-color: rgba(0, 0, 0, 0.1); padding: 10px; border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.1); flex-shrink: 0; }
         .details-image-container img { max-width: 100%; max-height: 30vh; height: auto; border: 1px solid rgba(255, 80, 80, 0.3); background-color: #000; box-shadow: 0 0 10px rgba(255, 0, 0, 0.2); }
 
-        /* --- 评论区样式 (保持不变) --- */
-        .comment-section { margin-top: 0; padding-top: 20px; border-top: 1px solid rgba(255, 80, 80, 0.3); flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(10, 0, 0, 0.5); padding-right: 5px; }
-        .comment-section::-webkit-scrollbar { width: 8px; }
-        .comment-section::-webkit-scrollbar-track { background: rgba(10, 0, 0, 0.5); border-radius: 4px; margin-right: 3px; }
-        .comment-section::-webkit-scrollbar-thumb { background-color: rgba(255, 80, 80, 0.4); border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.6); }
-        .comment-section::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 80, 80, 0.6); }
+        .comment-section {
+            margin-top: 10px; /* 调整间距 */
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 80, 80, 0.3);
+            flex-grow: 1; /* 占据剩余空间 */
+            /* 移除 overflow-y */
+            display: flex;
+            flex-direction: column;
+            padding-right: 5px; /* 保留一些内边距 */
+             min-height: 100px; /* 给评论区一个最小高度，避免内容少时塌陷 */
+        }
+
         .comment-placeholder { color: #a09090; font-style: italic; text-align: center; padding: 15px; border: 1px dashed rgba(255, 80, 80, 0.3); border-radius: 4px; background-color: rgba(255, 80, 80, 0.05); margin-bottom: 20px; flex-shrink: 0; margin-right: 10px; }
         .comment-list { list-style: none; padding: 0; margin: 0; padding-right: 10px; }
         .comment-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255, 80, 80, 0.15); }
@@ -165,7 +165,7 @@
         .comment-user { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .comment-user span:first-child { color: #ff8080; font-weight: bold; font-size: 0.95em; }
         .comment-user .comment-time { color: #776666; font-size: 0.85em; }
-        .comment-text { color: #c0a0a0; font-size: 0.95em; line-height: 1.7; word-wrap: break-word; }
+        .comment-text { color: #c0a0a0; font-size: 0.95em; line-height: 1.7; word-wrap: break-word; white-space: pre-wrap; /* 保留评论换行 */}
 
         /* --- 伪造统计模块 (保持不变) --- */
         #fake-stats-widget { position: fixed; bottom: 15px; left: 15px; background-color: rgba(30, 5, 5, 0.9); color: #c0a0a0; padding: 12px 18px; border-radius: 6px; font-family: 'Courier New', Courier, monospace; font-size: 13px; line-height: 1.6; z-index: 999; box-shadow: 0 0 15px rgba(255, 0, 0, 0.3); border: 1px solid rgba(255, 80, 80, 0.3); min-width: 180px; }
@@ -293,20 +293,20 @@
         </div>
     </div>
 
-    <!-- 罪证详情模态窗口 (调整联系信息区域) -->
+    <!-- 罪证详情模态窗口 (优化后) -->
     <div id="details-modal" class="modal modal-details">
-        <div class="modal-content">
+        <div class="modal-content"> <!-- 这个容器现在负责滚动 -->
             <button class="close-modal-button" data-modal-id="details-modal">&times;</button>
             <h2 id="details-title">罪证记录</h2>
 
             <!-- 主要罪证文本 -->
             <div class="details-content" id="details-text-content">
-                <!-- 罪行文本（不含联系方式）将动态加载于此 -->
+                <!-- 罪行文本将动态加载于此 -->
             </div>
 
             <!-- 联系信息显示区域 -->
             <div class="contact-info-container" id="contact-info-display" style="display: none;">
-                <!-- 联系信息将通过 JS 动态生成并插入这里 -->
+                <!-- 联系信息将动态加载于此 -->
             </div>
 
             <!-- 图片容器 -->
@@ -317,16 +317,8 @@
             <!-- 评论区 -->
             <div class="comment-section">
                 <p class="comment-placeholder">登录后可留言</p>
-                <div class="comment-list">
-                    <!-- 评论保持不变，注意敏感词已手动处理 -->
-                    <div class="comment-item"><div class="comment-user"><span>匿名用户</span><span class="comment-time">2 小时前</span></div><div class="comment-text">哟，这不是大名鼎鼎的XX吗？怎么落到这种地步了？笑<优x秀>死<优x秀>爹了，真是大快人心！🍾️</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>正义执行</span><span class="comment-time">5 小时前</span></div><div class="comment-text">这种网络蛀虫早该被清算了！以为披个马甲就没人认得？天真！感谢 舌 焚 錄！</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>贴吧观光团</span><span class="comment-time">8 小时前</span></div><div class="comment-text">典中典，急了急了😅？当初跳脸的时候不是很狂吗？现在怎么不叫了？继续跳啊小丑🤡！</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>匿名用户</span><span class="comment-time">1 天前</span></div><div class="comment-text">纯÷生，还活着干嘛？赶紧remake吧，别污染网络环境了。看到你就晦气！</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>午夜凶铃</span><span class="comment-time">1 天前</span></div><div class="comment-text">呵呵，报应来了吧？人在做天在看，不是不报时候未到！祝你下半辈子在阴沟里腐烂发臭。</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>B站路人甲</span><span class="comment-time">2 天前</span></div><div class="comment-text">逆天，真给你<优x秀>妈<优x秀>长脸啊！你<优x秀>妈<优x秀>知道你这么出生吗？估计已经气<优x秀>死<优x秀>了吧？</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>受害者联盟</span><span class="comment-time">3 天前</span></div><div class="comment-text">终于等到这一天了！你也有今天！当年欠下的债，现在该加倍偿还了！别想跑！</div></div>
-                     <div class="comment-item"><div class="comment-user"><span>匿名用户</span><span class="comment-time">5 天前</span></div><div class="comment-text">什么成分不用我多说了吧？懂得都懂😅。赶紧去下面跟你野爹团聚吧。</div></div>
+                <div class="comment-list" id="comment-list-display">
+                    <!-- 评论将通过 JS 动态生成并插入这里 -->
                 </div>
             </div>
         </div>
@@ -341,7 +333,7 @@
         <div class="sync-time"> 同步于: <span id="last-sync-time">2025.04.04</span> </div>
      </div>
 
-    <!-- JavaScript (修改数据结构和事件监听器) -->
+    <!-- JavaScript (已移除敏感词处理，滚动条优化通过 CSS 实现) -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         // --- 伪造统计JS代码 (保持不变) ---
@@ -353,46 +345,68 @@
         }
         updateStats();
 
-        // --- 曝光数据 (修改：为所有条目添加 contactInfo 数组) ---
+        // --- 曝光数据 (保持不变) ---
         const exposedData = {
             "小鸢鬼": {
                 title: "孽镜台：小鸢鬼",
-                crimes: "原名：星鸢 \n\nSTEAM主页：https://steamcommunity.com/id/DCS431516526 \n\n纯<优x秀>傻<优x秀>逼<优x秀>一个，也是个喜欢写狗屁测评来标榜自己看不起最看不起那的，曾经被爆破过STEAM主页，后面学聪明了直接全部删掉了留言关闭了留言直接洗白换个圈子依然兴风作浪。对了，浅霜事件他也有参与，看他时候啥嘴脸，一副高高在上的模样，都小心点吧，指不定哪天就被他背刺了\n\n初步证据指向其与数起网络欺凌事件相关联，导致受害者名誉及精神受损。\n\n关联证据链：[内部索引 KFX-XIAOYG-001-E]",
-                imageUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
-                contactInfo: [ // 改为数组
-                    { label: "QQ:", placeholderText: "登录后可见" },
+                crimes: "原名：星鸢 \n\nSTEAM主页：https://steamcommunity.com/id/DCS431516526 \n\n纯傻逼一个，也是个喜欢写狗屁测评来标榜自己看不起最看不起那的，曾经被爆破过STEAM主页，后面学聪明了直接全部删掉了留言关闭了留言直接洗白换个圈子依然兴风作浪。对了，浅霜事件他也有参与，看他时候啥嘴脸，一副高高在上的模样，都小心点吧，指不定哪天就被他背刺了。最后好好欣赏欣赏它的照片。为了遵守它居住地的法律，它的脸部照片解锁才可看。\n\n初步证据指向其与数起网络欺凌事件相关联，导致受害者名誉及精神受损。\n\n关联证据链：[内部索引 KFX-XIAOYG-001-E]",
+                imageUrl: "https://thumbs2.imgbox.com/97/ba/rzZLYqjC_t.jpg",
+                contactInfo: [
+                    { label: "照片：&nbsp;", placeholderText: "登录后可见" },
                     { label: "手机号:", placeholderText: "登录后可见" },
                     { label: "居住地:", placeholderText: "登录后可见" }
+                ],
+                comments: [
+                    { user: "猎🐎人", time: "1 小时前", text: "这货还有脸活着？浅霜那事儿就该直接线下单杀它！" },
+                    { user: "匿名", time: "3 小时前", text: "看它那照片就一股子猥琐逼样，指定没少干缺德事。" },
+                    { user: "蒸汽清洁工", time: "6 小时前", text: "删评控评有一手的，可惜互联网有记忆，扒的就是你这种狗杂种。" }
                 ]
             },
             "沟耳屎": {
                  title: "罪证记录：沟耳屎",
-                 crimes: "原名：3L-Grc \n\nSTEAM主页：https://steamcommunity.com/profiles/76561198798424533  \n\nB站UID:176543721 (虚梦3L-Grc幻) https://space.bilibili.com/176543721 \n\nWuhan, Hube人，自己写的怪猎测评像老太太大臭袜子一样没人看，发现了人家女生写的好的评测点赞和评论比它的多，所以就嫉妒了，就像条狗一样乱尿阴阳怪气找存在感，骂完一击脱离，贱不贱啊？3L-Grc你要是真懂你<优x秀>妈<优x秀>的烂<优x秀>逼<优x秀>怎么深的你就不会天天打飞机把脑子射没了，用个小破笔记本天天在那挂机崛起的云玩家，连成就都是用工具解锁的装什么<优x秀>逼<优x秀>啊，挂不起荒野和世界，只敢挂登陆ns的崛起，付不起电费了都还要最好装一次<优x秀>逼<优x秀>，你<优x秀>妈<优x秀>的烂<优x秀>逼<优x秀>还不够你用的吗？<优x秀>草<优x秀>泥<优x秀>马<优x秀>的天天玩黄油打飞机没人理就来我们这硬蹭，能蹭你<优x秀>妈<优x秀>了隔壁呢，没实力又想蹭是这样的，纯小丑🤡。\n\n关联证据链：[内部索引 KFX-GOUES-001-P]",
-                 imageUrl: "https://images.unsplash.com/photo-1580894894513-541e068a3e2b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
-                 contactInfo: [ // 添加数组
-                    { label: "QQ:", placeholderText: "登录后可见" },
-                    { label: "手机号:", placeholderText: "登录后可见" },
-                    { label: "居住地:", placeholderText: "登录后可见" }
-                 ]
-            },
+                 crimes: "原名：3L-Grc \n\nSTEAM主页：https://steamcommunity.com/profiles/76561198798424533  \n\nB站UID:176543721 (虚梦3L-Grc幻) https://space.bilibili.com/176543721 \n\nWuhan, Hube人，自己写的怪猎测评像老太太大臭袜子一样没人看，发现了人家女生写的好的评测点赞和评论比它的多，所以就嫉妒了，就像条狗一样乱尿阴阳怪气找存在感，骂完一击脱离，贱不贱啊？3L-Grc你要是真懂你妈的烂逼怎么生的你就不会天天打飞机把脑子射没了，用个小破笔记本天天在那挂机崛起的云玩家，连成就都是用工具解锁的为什么总喜欢跳人脸上装什么逼啊，挂不起荒野和世界，只敢挂登陆ns的崛起，付不起电费了都还要最后装一次逼才去死，你妈的烂逼还不够你用的吗？草泥马的天天玩黄油打飞机没人理就来我们这硬蹭，能蹭你妈了隔壁呢，没实力又想蹭是这样的，纯小丑🤡https://imgbox.com/Txot5rtR,https://imgbox.com/o8zXAE6o,https://imgbox.com/RjDclr97,https://imgbox.com/xUQYFgLk,https://imgbox.com/9fjEQ2ge,https://imgbox.com/3Qk3WggI, \n\n关联证据链：[内部索引 KFX-GOUES-001-P]",
+	                 imageUrl: "https://thumbs2.imgbox.com/4d/26/3Qk3WggI_t.jpg",
+	                 contactInfo: [
+	                    { label: "QQ：", placeholderText: "登录后可见" },
+	                    { label: "手机号:", placeholderText: "登录后可见" },
+	                    { label: "居住地:", placeholderText: "登录后可见" }
+	                 ],
+	                 comments: [
+	                     { user: "怪猎警察", time: "尼玛", text: "云玩家还爱指点江山？自己水平不行就急眼咬人，真是丢尽猎人的脸！" },
+	                     { user: "Wuhan Reject", time: "4 小时前", text: "我们武汉不认这种货色，赶紧滚出克！别给我们抹黑！" },
+	                     { user: "技术宅", time: "7 小时前", text: "SAM解锁成就还行，没点逼数的东西，迟早被人开盒。" },
+	                     { user: "烈马人", time: "7 小时前", text: "SAM解锁成就还行，没点逼数的东西，迟早被人开盒。" }
+	                 ]
+	            },
             "星狗": {
                  title: "罪证记录：星狗",
-                 crimes: "喜欢用*号作为它名字的<优x秀>傻<优x秀>逼<优x秀>，大脑就键盘上的*那么大，该<优x秀>傻<优x秀>逼<优x秀>进外群找事，乱咬群友，阴阳管理人员，还标榜自己组内战贡献大，经查询STEAM组内无此人，内战也没有目击者证明，后狗急跳墙涉及利用平台漏洞进行非法操作、传播被严格管制的内部文件插件。\n\n技术分析确认其曾尝试利用黑产等手段攻击本站及关联站点服务器，试图窃取或篡改数据，虽未成功突破核心防御，但已构成明确威胁。就是个<优x秀>傻<优x秀>逼<优x秀>。\n\n关联证据链：[内部索引 KFX-XINGG-001-T]",
-                 imageUrl: "https://images.unsplash.com/photo-1550751827-41349b489a11?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
-                 contactInfo: [ // 添加数组
-                     { label: "QQ:", placeholderText: "登录后可见" },
+                 crimes: "喜欢用*号作为它名字的傻逼，大脑就键盘上的*那么大，这个傻逼进外群找事，乱咬群友，阴阳管理人员，还标榜自己组内战贡献大，经查询STEAM组内无此人，内战也没有目击者证明，后狗急跳墙涉及利用平台漏洞进行非法操作、传播被严格管制的内部文件插件。\n\n技术分析确认其曾尝试利用黑产等手段攻击本站及关联站点服务器，试图窃取或篡改数据，虽未成功突破核心防御，但已构成明确威胁。就是个傻逼。\n\n关联证据链：[内部索引 KFX-XINGG-001-T]",
+                 imageUrl: "https://thumbs2.imgbox.com/4b/01/DIZnikt6_t.jpg",
+                 contactInfo: [
+                     { label: "QQ：", placeholderText: "459403046" },
                      { label: "手机号:", placeholderText: "登录后可见" },
-                     { label: "居住地:", placeholderText: "登录后可见" }
+                     { label: "精彩视频:", placeholderText: "登录后可见" }
+                 ],
+                 comments: [
+                     { user: "反黑急先锋", time: "2023.3.4", text: "搞黑产攻击网站？这种人就该直接报警抓起来枪毙！" },
+                     { user: "群聊受害者", time: "2023.1.6", text: "就是它！上次在XX群里像疯狗一样咬人，原来是个只会搞小动作的垃圾。" },
+                     { user: "吃瓜群众", time: "2023.1.2", text: "贡献大？我看是吹牛逼贡献大吧？笑拉了。" },	
+                     { user: "吃瓜群众", time: "2023.1.2", text: "贡献大？我看是吹牛逼贡献大吧？笑拉了。" },
                  ]
             },
             "专业没妈": {
                  title: "罪证记录：专业没妈",
-                 crimes: "纯TM小学生，山沟沟里的，给广大农村人丢脸，扒出来是个留守儿童，作孽啊，你爷爷奶奶辛<优x秀>辛<优x秀>苦<优x秀>苦<优x秀>养着你是让你去到处沾花惹草到处骂人的？\n\n关联证据链：[内部索引 KFX-ZYMM-001-V]",
-                 imageUrl: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60",
-                 contactInfo: [ // 添加数组
+                 crimes: "纯TM小学生，山沟沟里的，给广大农村人丢脸，这个昵称为 “专业白给” 的没妈的玩意。作为一个毫无贡献的路人在我们的求生之路分部服务器里玩，M2 开局它自己那个喷子单防不住不看队友站位打的很脑残却还自以为打得很好的同时还不停压力队友，然后它用那黄豆般的脑子给出的低能的指挥，如果队友没有完全按照它说的做，它就会阴阳怪气，或者骂人，在他的不停压力阴阳和乱指挥下，明明一个本该放松合作的游戏就被这一个搅屎棍搞得全无，管理和它讲道理无果后 “专业白给” 它倒反天罡！不知道的还以为是他的服务器他当皇帝呢！让组里大家都认识了它这个本来不知名的小垃圾真是丢国人的脸。扒出来是个留守儿童，作孽啊，你爷爷奶奶辛辛苦苦养着你是让你去到处沾花惹草到处骂人的？\n\n关联证据链：[内部索引 KFX-ZYMM-001-V]",
+                 imageUrl: "https://thumbs2.imgbox.com/df/39/gHlEp9kP_t.png",
+                 contactInfo: [
                      { label: "QQ:", placeholderText: "登录后可见" },
                      { label: "手机号:", placeholderText: "登录后可见" },
                      { label: "居住地:", placeholderText: "登录后可见" }
+                 ],
+                 comments: [
+                    { user: "L4D老兵", time: "2 小时前", text: "这种压力怪最恶心了，自己菜得抠脚还怪队友，赶紧滚回去玩泥巴吧。" },
+                    { user: "乡村振兴办", time: "4 小时前", text: "我们农村不背这锅！家教不好怪社会？赶紧让你爷奶领回去拴好！" },
+                    { user: "服务器管理员", time: "9 小时前", text: "这傻逼还敢反咬管理？脑子确实只有黄豆大，建议remake。" }
                  ]
             }
          };
@@ -400,6 +414,7 @@
         // --- 模态窗口元素引用 (保持不变) ---
         const loginButton = document.getElementById('login-button'); const announcementButton = document.getElementById('announcement-button'); const loginModal = document.getElementById('login-modal'); const registerModal = document.getElementById('register-modal'); const announcementModal = document.getElementById('announcement-modal'); const detailsModal = document.getElementById('details-modal'); const loginErrorEl = document.getElementById('login-error'); const registerErrorEl = document.getElementById('register-error'); const loginForm = document.getElementById('login-form'); const registerForm = document.getElementById('register-form'); const loginSubmitButton = document.getElementById('login-submit-button'); const registerSubmitButton = document.getElementById('register-submit-button'); const detailsTitleEl = document.getElementById('details-title'); const detailsTextEl = document.getElementById('details-text-content'); const detailsImageEl = document.getElementById('details-image');
         const contactInfoDisplay = document.getElementById('contact-info-display');
+        const commentListDisplay = document.getElementById('comment-list-display');
 
         // --- 函数：打开/关闭模态框, 显示/隐藏错误, 计算随机延迟 (保持不变) ---
         function openModal(modalId) {
@@ -409,56 +424,111 @@
             if (loginSubmitButton) { loginSubmitButton.disabled = false; loginSubmitButton.classList.remove('loading'); }
             if (registerSubmitButton) { registerSubmitButton.disabled = false; registerSubmitButton.classList.remove('loading'); }
             modalElement.style.display = 'flex';
-            if (modalId === 'details-modal') {
-                const commentSection = modalElement.querySelector('.comment-section');
-                if (commentSection) commentSection.scrollTop = 0;
-                 const detailsContent = modalElement.querySelector('.details-content');
-                if (detailsContent) detailsContent.scrollTop = 0;
-            } else {
-                 const list = modalElement.querySelector('.announcements-list');
-                 if(list) list.scrollTop = 0;
+
+            // 确保打开详情或公告模态框时滚动条在顶部
+            if (modalId === 'details-modal' || modalId === 'announcement-modal') {
+                const contentElement = modalElement.querySelector('.modal-content, .announcements-list'); // 获取需要滚动的元素
+                 if (contentElement) {
+                      contentElement.scrollTop = 0;
+                 }
             }
         }
         function closeModal(modalId) { const modalElement = document.getElementById(modalId); if (modalElement) { modalElement.style.display = 'none'; } }
         function showError(element, message) { element.textContent = message; element.style.display = 'block'; } function hideError(element) { element.textContent = ''; element.style.display = 'none'; }
         function getRandomDelay(minSeconds, maxSeconds) { return (Math.random() * (maxSeconds - minSeconds) + minSeconds) * 1000; }
 
-        // --- 敏感词处理函数 (示例，需要根据实际需求完善词库和逻辑) ---
-        function applyObfuscation(text) {
-            if (!text) return ''; // 处理空文本
-            // 基础替换示例
-            text = text.replace(/傻逼/g, '<优x秀>傻<优x秀>逼<优x秀>');
-             text = text.replace(/妈/g, '<优x秀>妈<优x秀>'); // 单字'妈'
-             text = text.replace(/逼/g, '<优x秀>逼<优x秀>'); // 单字'逼'
-             text = text.replace(/草泥马/g, '<优x秀>草<优x秀>泥<优x秀>马<优x秀>');
-             text = text.replace(/辛辛苦苦/g, '<优x秀>辛<优x秀>辛<优x秀>苦<优x秀>苦<优x秀>'); // 处理"沟耳屎"描述中的词
-             // 添加更多规则...
-             return text.replace(/\n/g, '<br>'); // 最后处理换行符
+        // --- 换行处理函数 ---
+        function formatNewlines(text) {
+            return text ? text.replace(/\n/g, '<br>') : '';
         }
 
+        // --- 事件监听器设置 (移除敏感词处理调用, 其他保持不变) ---
+        loginButton.addEventListener('click', () => openModal('login-modal'));
+        announcementButton.addEventListener('click', () => openModal('announcement-modal'));
 
-        // --- 事件监听器设置 (修改点击事件处理逻辑以遍历 contactInfo 数组) ---
-        loginButton.addEventListener('click', () => openModal('login-modal')); announcementButton.addEventListener('click', () => openModal('announcement-modal')); document.querySelectorAll('.close-modal-button').forEach(button => { button.addEventListener('click', () => { const modalId = button.getAttribute('data-modal-id'); if (modalId) { closeModal(modalId); } else { const modal = button.closest('.modal'); if (modal) modal.style.display = 'none'; } }); }); document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', (event) => { if (event.target === modal) { closeModal(modal.id); } }); modal.querySelector('.modal-content').addEventListener('click', (event) => event.stopPropagation()); }); document.querySelectorAll('.register-switch').forEach(button => { button.addEventListener('click', () => { closeModal('login-modal'); openModal('register-modal'); }); }); document.querySelectorAll('.login-switch').forEach(button => { button.addEventListener('click', () => { closeModal('register-modal'); openModal('login-modal'); }); }); loginForm.addEventListener('submit', (event) => { event.preventDefault(); hideError(loginErrorEl); loginSubmitButton.disabled = true; loginSubmitButton.classList.add('loading'); const delay = getRandomDelay(1.5, 3); setTimeout(() => { showError(loginErrorEl, '认证失败：账户凭据无效或已被吊销。'); loginSubmitButton.disabled = false; loginSubmitButton.classList.remove('loading'); }, delay); }); registerForm.addEventListener('submit', (event) => { event.preventDefault(); hideError(registerErrorEl); const inviteCodeInput = document.getElementById('invite-code-input'); const inviteCode = inviteCodeInput.value.trim(); if (!inviteCode) { showError(registerErrorEl, '必须提供有效的邀请码以完成注册。'); inviteCodeInput.focus(); } else { registerSubmitButton.disabled = true; registerSubmitButton.classList.add('loading'); const delay = getRandomDelay(2, 4); setTimeout(() => { showError(registerErrorEl, '无效邀请码。请核实。'); registerSubmitButton.disabled = false; registerSubmitButton.classList.remove('loading'); }, delay); } });
+        document.querySelectorAll('.close-modal-button').forEach(button => {
+             button.addEventListener('click', () => {
+                 const modalId = button.getAttribute('data-modal-id');
+                 if (modalId) {
+                     closeModal(modalId);
+                 } else { // Fallback for potentially missing attribute
+                     const modal = button.closest('.modal');
+                     if (modal) modal.style.display = 'none';
+                 }
+             });
+        });
+
+        document.querySelectorAll('.modal').forEach(modal => {
+             // 点击模态框背景关闭
+             modal.addEventListener('click', (event) => {
+                 if (event.target === modal) {
+                     closeModal(modal.id);
+                 }
+             });
+             // 阻止点击内容区域关闭模态框
+             const content = modal.querySelector('.modal-content');
+             if (content) {
+                 content.addEventListener('click', (event) => event.stopPropagation());
+             }
+        });
+
+        document.querySelectorAll('.register-switch').forEach(button => {
+             button.addEventListener('click', () => { closeModal('login-modal'); openModal('register-modal'); });
+        });
+        document.querySelectorAll('.login-switch').forEach(button => {
+             button.addEventListener('click', () => { closeModal('register-modal'); openModal('login-modal'); });
+        });
+
+        loginForm.addEventListener('submit', (event) => {
+             event.preventDefault();
+             hideError(loginErrorEl);
+             loginSubmitButton.disabled = true;
+             loginSubmitButton.classList.add('loading');
+             const delay = getRandomDelay(1.5, 3);
+             setTimeout(() => {
+                 showError(loginErrorEl, '认证失败：账户凭据无效或已被吊销。');
+                 loginSubmitButton.disabled = false;
+                 loginSubmitButton.classList.remove('loading');
+             }, delay);
+        });
+
+        registerForm.addEventListener('submit', (event) => {
+             event.preventDefault();
+             hideError(registerErrorEl);
+             const inviteCodeInput = document.getElementById('invite-code-input');
+             const inviteCode = inviteCodeInput.value.trim();
+             if (!inviteCode) {
+                 showError(registerErrorEl, '必须提供有效的邀请码以完成注册。');
+                 inviteCodeInput.focus();
+             } else {
+                 registerSubmitButton.disabled = true;
+                 registerSubmitButton.classList.add('loading');
+                 const delay = getRandomDelay(2, 4);
+                 setTimeout(() => {
+                     showError(registerErrorEl, '无效邀请码。请核实。');
+                     registerSubmitButton.disabled = false;
+                     registerSubmitButton.classList.remove('loading');
+                 }, delay);
+             }
+        });
 
         document.querySelectorAll('.exposed-name').forEach(nameElement => {
              nameElement.addEventListener('click', () => {
                  const nameKey = nameElement.getAttribute('data-name');
                  const data = exposedData[nameKey];
 
-                 if (data && detailsModal && detailsTitleEl && detailsTextEl && detailsImageEl && contactInfoDisplay) {
+                 if (data && detailsModal && detailsTitleEl && detailsTextEl && detailsImageEl && contactInfoDisplay && commentListDisplay) {
                      detailsTitleEl.textContent = data.title || '罪证记录';
-                     // 使用 applyObfuscation 处理罪证文本
-                     detailsTextEl.innerHTML = applyObfuscation(data.crimes || '暂无详细记录。');
+                     detailsTextEl.innerHTML = formatNewlines(data.crimes || '暂无详细记录。'); // 仅处理换行
                      detailsImageEl.src = data.imageUrl || '';
                      detailsImageEl.alt = `关于 ${nameKey} 的罪证图片`;
 
                      // 处理联系信息数组
-                     contactInfoDisplay.innerHTML = ''; // 清空现有内容
+                     contactInfoDisplay.innerHTML = '';
                      if (Array.isArray(data.contactInfo) && data.contactInfo.length > 0) {
                          let contactHtml = '';
                          data.contactInfo.forEach(info => {
                              if (info.label && info.placeholderText) {
-                                 // 为每一行联系信息包裹一个 div 以便控制间距
                                  contactHtml += `
                                      <div class="contact-info-line">
                                          <span class="contact-info-label">${info.label}</span>
@@ -468,13 +538,33 @@
                              }
                          });
                          contactInfoDisplay.innerHTML = contactHtml;
-                         contactInfoDisplay.style.display = 'block'; // 显示容器
+                         contactInfoDisplay.style.display = 'block';
                      } else {
-                         contactInfoDisplay.style.display = 'none'; // 隐藏容器
+                         contactInfoDisplay.style.display = 'none';
                      }
 
-                     // 更新评论区 (如果需要)
-                     // updateCommentsFor(nameKey);
+                     // 处理独立评论区
+                     commentListDisplay.innerHTML = ''; // 清空现有评论
+                     if (Array.isArray(data.comments) && data.comments.length > 0) {
+                         let commentsHtml = '';
+                         data.comments.forEach(comment => {
+                             if (comment.user && comment.time && comment.text) {
+                                 const processedCommentText = formatNewlines(comment.text); // 仅处理评论换行
+                                 commentsHtml += `
+                                     <div class="comment-item">
+                                         <div class="comment-user">
+                                             <span>${comment.user}</span>
+                                             <span class="comment-time">${comment.time}</span>
+                                         </div>
+                                         <div class="comment-text">${processedCommentText}</div>
+                                     </div>
+                                 `;
+                             }
+                         });
+                         commentListDisplay.innerHTML = commentsHtml;
+                     } else {
+                         // 如果没评论，comment-placeholder 会显示
+                     }
 
                      openModal('details-modal');
                  } else {
