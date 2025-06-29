@@ -26,59 +26,59 @@
 
         /* --- 诅咒文字背景 (保持不变) --- */
         #cursed-text-background { position: fixed; inset: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: 0; }
-        。cursed-text { position: absolute; color: #501010; font-family: 'KaiTi', 'SimSun', serif; opacity: 0.05; white-space: nowrap; user-select: none; animation: text-flicker 6s infinite alternate, subtle-drift 15s infinite alternate ease-in-out; text-shadow: 0 0 3px rgba(232, 0, 0, 0.5); writing-mode: vertical-rl; text-orientation: mixed; }
+        .cursed-text { position: absolute; color: #501010; font-family: 'KaiTi', 'SimSun', serif; opacity: 0.05; white-space: nowrap; user-select: none; animation: text-flicker 6s infinite alternate, subtle-drift 15s infinite alternate ease-in-out; text-shadow: 0 0 3px rgba(232, 0, 0, 0.5); writing-mode: vertical-rl; text-orientation: mixed; }
 
         /* --- 内容容器 (保持不变) --- */
-        。content-wrapper { padding: 40px 20px; position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .content-wrapper { padding: 40px 20px; position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
 
         /* --- 头部、主要内容、曝光栏、页脚、按钮等样式 (保持不变) --- */
-        。header-content { text-align: center; margin-bottom: 60px; }
-        。header-content h1 { color: #ffcccc; padding-bottom: 15px; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 5px rgba(255, 100, 100, 0.5); font-size: 3.8em; letter-spacing: 4px; position: relative; display: inline-block; font-family: 'SimHei', 'FangSong', sans-serif; }
-        。header-content h1::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -5px; width: 80%; height: 2px; background: linear-gradient(to right, transparent, rgba(255, 0, 0, 0.8), transparent); box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
-        。header-content p { color: #a09090; font-size: 1.1em; margin-top: 10px; margin-bottom: 0; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); }
-        。main-content { text-align: center; margin-bottom: 40px; }
-        。main-content h2 { color: #ff5050; border: none; padding-bottom: 5px; margin-top: 0; margin-bottom: 35px; text-shadow: 0 0 12px rgba(255, 0, 0, 0.6); font-size: 2.2em; letter-spacing: 2px; font-family: 'FangSong', 'KaiTi', serif; }
-        。gallery { display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap; padding: 20px 0; }
-        。exposed-name { display: flex; flex-direction: column; align-items: center; color: #ff4444; font-size: 1.8em; font-family: 'KaiTi', 'FangSong', serif; line-height: 1.3; text-shadow: 0 0 6px rgba(255, 0, 0, 0.5); writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; cursor: pointer; transition: color 0.3s ease, text-shadow 0.3s ease; }
-        。exposed-name:hover { color: #ff8080; text-shadow: 0 0 12px rgba(255, 0, 0, 0.8); }
-        。contact-footer { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; text-align: center; color: #776666; font-size: 0.9em; font-family: 'SimSun', serif; padding: 8px 0; background-color: rgba(10, 0, 0, 0.8); z-index: 998; letter-spacing: 1px; }
-        。top-right-buttons { position: fixed; top: 15px; right: 20px; z-index: 1000; display: flex; gap: 10px; }
-        。top-right-button { background-color: rgba(50, 0, 0, 0.8); color: #ff8080; border: 1px solid rgba(255, 80, 80, 0.5); padding: 8px 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; }
-        。top-right-button:hover { background-color: rgba(255, 80, 80, 0.3); color: #ffffff; box-shadow: 0 0 18px rgba(255, 0, 0, 0.7); }
+        .header-content { text-align: center; margin-bottom: 60px; }
+        .header-content h1 { color: #ffcccc; padding-bottom: 15px; margin-bottom: 10px; text-shadow: 0 0 15px rgba(255, 0, 0, 0.7), 0 0 5px rgba(255, 100, 100, 0.5); font-size: 3.8em; letter-spacing: 4px; position: relative; display: inline-block; font-family: 'SimHei', 'FangSong', sans-serif; }
+        .header-content h1::after { content: ''; position: absolute; left: 50%; transform: translateX(-50%); bottom: -5px; width: 80%; height: 2px; background: linear-gradient(to right, transparent, rgba(255, 0, 0, 0.8), transparent); box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); }
+        .header-content p { color: #a09090; font-size: 1.1em; margin-top: 10px; margin-bottom: 0; line-height: 1.8; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 0 4px rgba(0, 0, 0, 0.8); }
+        .main-content { text-align: center; margin-bottom: 40px; }
+        .main-content h2 { color: #ff5050; border: none; padding-bottom: 5px; margin-top: 0; margin-bottom: 35px; text-shadow: 0 0 12px rgba(255, 0, 0, 0.6); font-size: 2.2em; letter-spacing: 2px; font-family: 'FangSong', 'KaiTi', serif; }
+        .gallery { display: flex; justify-content: center; gap: 40px; margin-bottom: 40px; flex-wrap: wrap; padding: 20px 0; }
+        .exposed-name { display: flex; flex-direction: column; align-items: center; color: #ff4444; font-size: 1.8em; font-family: 'KaiTi', 'FangSong', serif; line-height: 1.3; text-shadow: 0 0 6px rgba(255, 0, 0, 0.5); writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap; cursor: pointer; transition: color 0.3s ease, text-shadow 0.3s ease; }
+        .exposed-name:hover { color: #ff8080; text-shadow: 0 0 12px rgba(255, 0, 0, 0.8); }
+        .contact-footer { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; text-align: center; color: #776666; font-size: 0.9em; font-family: 'SimSun', serif; padding: 8px 0; background-color: rgba(10, 0, 0, 0.8); z-index: 998; letter-spacing: 1px; }
+        .top-right-buttons { position: fixed; top: 15px; right: 20px; z-index: 1000; display: flex; gap: 10px; }
+        .top-right-button { background-color: rgba(50, 0, 0, 0.8); color: #ff8080; border: 1px solid rgba(255, 80, 80, 0.5); padding: 8px 18px; font-family: 'Courier New', Courier, monospace; font-size: 14px; cursor: pointer; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 0 10px rgba(255, 0, 0, 0.4); transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; }
+        .top-right-button:hover { background-color: rgba(255, 80, 80, 0.3); color: #ffffff; box-shadow: 0 0 18px rgba(255, 0, 0, 0.7); }
 
         /* --- 通用模态窗口样式 (保持不变) --- */
-        。modal { display: none; position: fixed; inset: 0; background-color: rgba(15, 0, 0, 0.9); z-index: 1001; justify-content: center; align-items: center; padding: 20px; animation: modal-fade-in 0.3s ease forwards; overflow-y: auto; /* 允许模态框本身在内容过多时滚动 */ }
-        。modal-content { background-color: #1a0505; padding: 35px 45px; border-radius: 8px; position: relative; color: #e0d0d0; width: 100%; max-width: 480px; /* Login/Register */ text-align: center; font-family: 'KaiTi', 'SimSun', serif; border: 1px solid rgba(255, 80, 80, 0.4); box-shadow: 0 5px 30px rgba(255, 0, 0, 0.3); margin: auto; }
-        。modal-content h2 { color: #ff5050; text-shadow: 0 0 10px rgba(255, 80, 80, 0.5); margin-top: 0; margin-bottom: 30px; font-size: 1.8em; letter-spacing: 1.5px; font-family: 'FangSong', 'KaiTi', serif; }
+        .modal { display: none; position: fixed; inset: 0; background-color: rgba(15, 0, 0, 0.9); z-index: 1001; justify-content: center; align-items: center; padding: 20px; animation: modal-fade-in 0.3s ease forwards; overflow-y: auto; /* 允许模态框本身在内容过多时滚动 */ }
+        .modal-content { background-color: #1a0505; padding: 35px 45px; border-radius: 8px; position: relative; color: #e0d0d0; width: 100%; max-width: 480px; /* Login/Register */ text-align: center; font-family: 'KaiTi', 'SimSun', serif; border: 1px solid rgba(255, 80, 80, 0.4); box-shadow: 0 5px 30px rgba(255, 0, 0, 0.3); margin: auto; }
+        .modal-content h2 { color: #ff5050; text-shadow: 0 0 10px rgba(255, 80, 80, 0.5); margin-top: 0; margin-bottom: 30px; font-size: 1.8em; letter-spacing: 1.5px; font-family: 'FangSong', 'KaiTi', serif; }
         /* ... (登录/注册/公告模态框内元素样式保持不变) ... */
-        。modal-content label { display: block; text-align: left; margin-bottom: 8px; color: #a09090; font-size: 0.95em; }
-        。modal-content input[type="text"], .modal-content input[type="password"], .modal-content input[type="email"] { width: calc(100% - 26px); padding: 12px 13px; margin-bottom: 22px; background-color: rgba(50, 10, 10, 0.8); border-radius: 5px; color: #e0d0d0; font-size: 1em; transition: border-color 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(255, 80, 80, 0.4); }
-        。modal-content input:focus { outline: none; border-color: #ff5050; box-shadow: 0 0 10px rgba(255, 80, 80, 0.6); }
-        。modal-buttons { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; }
-        。modal-buttons button { flex-grow: 1; padding: 12px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; font-family: 'Courier New', Courier, monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; }
-        。modal-buttons button.primary { background-color: #c00000; color: #f0e0e0; }
-        。modal-buttons button.primary:hover:not(:disabled) { background-color: #ff3030; box-shadow: 0 0 12px rgba(255, 80, 80, 0.7); }
-        。modal-buttons button.secondary { background-color: transparent; color: #ff5050; border: 1px solid rgba(255, 80, 80, 0.5); }
-        。modal-buttons button.secondary:hover { background-color: rgba(255, 80, 80, 0.15); color: #ffffff; border-color: #ff5050; }
-        。modal-buttons button.loading::after { content: ''; display: block; position: absolute; top: 50%; left: 50%; width: 18px; height: 18px; margin-top: -9px; margin-left: -9px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: #fff; animation: spin 1s linear infinite; }
-        。modal-buttons button.loading { opacity: 0.7; pointer-events: none; }
-        。close-modal-button { position: absolute; top: 10px; right: 12px; background: none; border: none; color: #888; font-size: 28px; cursor: pointer; line-height: 1; padding: 5px; transition: color 0.3s ease; z-index: 10; }
-        。close-modal-button:hover { color: #ff5050; }
-        。error-message { display: none; background-color: rgba(255, 80, 80, 0.15); color: #ffcccc; border: 1px solid rgba(255, 80, 80, 0.5); padding: 12px 15px; margin-top: 20px; border-radius: 5px; text-align: left; font-size: 0.95em; animation: error-wiggle 0.4s ease; position: relative; padding-left: 40px; }
-        。error-message::before { content: '!'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; font-size: 1.5em; color: #ff5050; background-color: #1a0505; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; text-align: center; box-shadow: 0 0 5px rgba(255, 80, 80, 0.5); }
-        。modal-announcements .modal-content { max-width: 600px; text-align: left; }
-        。announcements-list { margin-top: 20px; max-height: 45vh; /* 保持最大高度 */ overflow-y: auto; /* 公告列表单独滚动 */ padding-right: 15px; border-top: 1px solid rgba(255, 80, 80, 0.2); padding-top: 20px; scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(50, 10, 10, 0.5); }
-        。announcements-list::-webkit-scrollbar { width: 8px; }
-        。announcements-list::-webkit-scrollbar-track { background: rgba(50, 10, 10, 0.5); border-radius: 4px; }
-        。announcements-list::-webkit-scrollbar-thumb { background-color: rgba(255, 80, 80, 0.4); border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.6); }
-        。announcements-list::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 80, 80, 0.6); }
-        。announcement-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255, 80, 80, 0.2); }
-        。announcement-item:last-child { margin-bottom: 0; border-bottom: none; }
-        。announcement-date { display: block; font-size: 0.9em; color: #ff8080; margin-bottom: 8px; font-family: 'Courier New', Courier, monospace; }
-        。announcement-text { font-size: 1em; color: #c0a0a0; line-height: 1.7; margin: 0; }
+        .modal-content label { display: block; text-align: left; margin-bottom: 8px; color: #a09090; font-size: 0.95em; }
+        .modal-content input[type="text"], .modal-content input[type="password"], .modal-content input[type="email"] { width: calc(100% - 26px); padding: 12px 13px; margin-bottom: 22px; background-color: rgba(50, 10, 10, 0.8); border-radius: 5px; color: #e0d0d0; font-size: 1em; transition: border-color 0.3s ease, box-shadow 0.3s ease; border: 1px solid rgba(255, 80, 80, 0.4); }
+        .modal-content input:focus { outline: none; border-color: #ff5050; box-shadow: 0 0 10px rgba(255, 80, 80, 0.6); }
+        .modal-buttons { display: flex; justify-content: space-between; gap: 15px; margin-top: 15px; }
+        .modal-buttons button { flex-grow: 1; padding: 12px 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1em; transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; font-family: 'Courier New', Courier, monospace; text-transform: uppercase; letter-spacing: 1px; position: relative; }
+        .modal-buttons button.primary { background-color: #c00000; color: #f0e0e0; }
+        .modal-buttons button.primary:hover:not(:disabled) { background-color: #ff3030; box-shadow: 0 0 12px rgba(255, 80, 80, 0.7); }
+        .modal-buttons button.secondary { background-color: transparent; color: #ff5050; border: 1px solid rgba(255, 80, 80, 0.5); }
+        .modal-buttons button.secondary:hover { background-color: rgba(255, 80, 80, 0.15); color: #ffffff; border-color: #ff5050; }
+        .modal-buttons button.loading::after { content: ''; display: block; position: absolute; top: 50%; left: 50%; width: 18px; height: 18px; margin-top: -9px; margin-left: -9px; border-radius: 50%; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: #fff; animation: spin 1s linear infinite; }
+        .modal-buttons button.loading { opacity: 0.7; pointer-events: none; }
+        .close-modal-button { position: absolute; top: 10px; right: 12px; background: none; border: none; color: #888; font-size: 28px; cursor: pointer; line-height: 1; padding: 5px; transition: color 0.3s ease; z-index: 10; }
+        .close-modal-button:hover { color: #ff5050; }
+        .error-message { display: none; background-color: rgba(255, 80, 80, 0.15); color: #ffcccc; border: 1px solid rgba(255, 80, 80, 0.5); padding: 12px 15px; margin-top: 20px; border-radius: 5px; text-align: left; font-size: 0.95em; animation: error-wiggle 0.4s ease; position: relative; padding-left: 40px; }
+        .error-message::before { content: '!'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: bold; font-size: 1.5em; color: #ff5050; background-color: #1a0505; border-radius: 50%; width: 24px; height: 24px; line-height: 24px; text-align: center; box-shadow: 0 0 5px rgba(255, 80, 80, 0.5); }
+        .modal-announcements .modal-content { max-width: 600px; text-align: left; }
+        .announcements-list { margin-top: 20px; max-height: 45vh; /* 保持最大高度 */ overflow-y: auto; /* 公告列表单独滚动 */ padding-right: 15px; border-top: 1px solid rgba(255, 80, 80, 0.2); padding-top: 20px; scrollbar-width: thin; scrollbar-color: rgba(255, 80, 80, 0.4) rgba(50, 10, 10, 0.5); }
+        .announcements-list::-webkit-scrollbar { width: 8px; }
+        .announcements-list::-webkit-scrollbar-track { background: rgba(50, 10, 10, 0.5); border-radius: 4px; }
+        .announcements-list::-webkit-scrollbar-thumb { background-color: rgba(255, 80, 80, 0.4); border-radius: 4px; border: 1px solid rgba(255, 80, 80, 0.6); }
+        .announcements-list::-webkit-scrollbar-thumb:hover { background-color: rgba(255, 80, 80, 0.6); }
+        .announcement-item { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255, 80, 80, 0.2); }
+        .announcement-item:last-child { margin-bottom: 0; border-bottom: none; }
+        .announcement-date { display: block; font-size: 0.9em; color: #ff8080; margin-bottom: 8px; font-family: 'Courier New', Courier, monospace; }
+        .announcement-text { font-size: 1em; color: #c0a0a0; line-height: 1.7; margin: 0; }
 
         /* --- 罪证详情模态窗口特定样式 (优化滚动条) --- */
-        。modal-details .modal-content {
+        .modal-details .modal-content {
             max-width: 750px;
             text-align: left;
             display: flex; /* 使用 Flexbox 布局 */
@@ -88,24 +88,24 @@
             scrollbar-width: thin;
             scrollbar-color: rgba(255, 80, 80, 0.5) rgba(10, 0, 0, 0.7);
         }
-        。modal-details .modal-content::-webkit-scrollbar {
+        .modal-details .modal-content::-webkit-scrollbar {
             width: 10px;
         }
-        。modal-details .modal-content::-webkit-scrollbar-track {
+        .modal-details .modal-content::-webkit-scrollbar-track {
             background: rgba(10, 0, 0, 0.7);
             border-radius: 5px;
         }
-        。modal-details .modal-content::-webkit-scrollbar-thumb {
+        .modal-details .modal-content::-webkit-scrollbar-thumb {
             background-color: rgba(255, 80, 80, 0.5);
             border-radius: 5px;
             border: 1px solid rgba(255, 80, 80, 0.7);
         }
-        。modal-details .modal-content::-webkit-scrollbar-thumb:hover {
+        .modal-details .modal-content::-webkit-scrollbar-thumb:hover {
              background-color: rgba(255, 80, 80, 0.7);
         }
 
         /* 子元素不再需要独立滚动 */
-        。details-content {
+        .details-content {
             background-color: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 80, 80, 0.2);
             padding: 20px;
